@@ -31,95 +31,457 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
+      //home: const GlyphGatewayHomePage(), //class
+      //home: const Login(), //Render-class
+      home: const Register(), //Render-class
     );
   }
 }
 
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key, required this.title});
-
-  // This widget is the home page of your application. It is stateful, meaning
-  // that it has a State object (defined below) that contains fields that affect
-  // how it looks.
-
-  // This class is the configuration for the state. It holds the values (in this
-  // case the title) provided by the parent (in this case the App widget) and
-  // used by the build method of the State. Fields in a Widget subclass are
-  // always marked "final".
-
-  final String title;
-
-  @override
-  State<MyHomePage> createState() => _MyHomePageState();
-}
-
-class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
-
-  void _incrementCounter() {
-    setState(() {
-      // This call to setState tells the Flutter framework that something has
-      // changed in this State, which causes it to rerun the build method below
-      // so that the display can reflect the updated values. If we changed
-      // _counter without calling setState(), then the build method would not be
-      // called again, and so nothing would appear to happen.
-      _counter++;
-    });
-  }
+class GlyphGatewayHomePage extends StatelessWidget {
+  const GlyphGatewayHomePage({super.key});
 
   @override
   Widget build(BuildContext context) {
-    // This method is rerun every time setState is called, for instance as done
-    // by the _incrementCounter method above.
-    //
-    // The Flutter framework has been optimized to make rerunning build methods
-    // fast, so that you can just rebuild anything that needs updating rather
-    // than having to individually change instances of widgets.
     return Scaffold(
       appBar: AppBar(
-        // TRY THIS: Try changing the color here to a specific color (to
-        // Colors.amber, perhaps?) and trigger a hot reload to see the AppBar
-        // change color while the other colors stay the same.
-        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-        // Here we take the value from the MyHomePage object that was created by
-        // the App.build method, and use it to set our appbar title.
-        title: Text(widget.title),
+        backgroundColor: Colors.yellow[700],
+        toolbarHeight: 20,
       ),
-      body: Center(
-        // Center is a layout widget. It takes a single child and positions it
-        // in the middle of the parent.
-        child: Column(
-          // Column is also a layout widget. It takes a list of children and
-          // arranges them vertically. By default, it sizes itself to fit its
-          // children horizontally, and tries to be as tall as its parent.
-          //
-          // Column has various properties to control how it sizes itself and
-          // how it positions its children. Here we use mainAxisAlignment to
-          // center the children vertically; the main axis here is the vertical
-          // axis because Columns are vertical (the cross axis would be
-          // horizontal).
-          //
-          // TRY THIS: Invoke "debug painting" (choose the "Toggle Debug Paint"
-          // action in the IDE, or press "p" in the console), to see the
-          // wireframe for each widget.
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            const Text(
-              'You have pushed the button this many times:',
+      body: Stack(
+        children: [
+          Container(
+            decoration: BoxDecoration(
+              image: DecorationImage(
+                image: const AssetImage('lib/assests/homebg.png'),
+                alignment: Alignment.center,
+                fit: BoxFit.cover,
+                colorFilter: ColorFilter.mode(
+                  Colors.black.withOpacity(0.6),
+                  BlendMode.darken,
+                ),
+              ),
             ),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.headlineMedium,
+            // child: const Center(
+            //   child: Text(
+            //     "This is the Glyph Gateway Home Page.",
+            //     style: TextStyle(
+            //       color: Colors.white,
+            //       fontSize: 24.0,
+            //       fontWeight: FontWeight.bold,
+            //     ),
+            //   ),
+            // ),
+          ),
+          Positioned(
+            left: 4,
+            right: 0,
+            bottom: 150,
+            child: Center(
+              child: Image.asset(
+                'lib/assests/logo.png',
+                width: 240,
+                height: 240,
+              ),
             ),
-          ],
-        ),
+          ),
+        ],
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: const Icon(Icons.add),
-      ), // This trailing comma makes auto-formatting nicer for build methods.
+    );
+  }
+}
+
+class Login extends StatelessWidget {
+  const Login({super.key});
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        backgroundColor: Colors.yellow[700],
+        toolbarHeight: 20,
+      ),
+      body: Stack(
+        children: [
+          Container(
+            decoration: BoxDecoration(
+              image: DecorationImage(
+                image: const AssetImage('lib/assests/homebg.png'),
+                alignment: Alignment.center,
+                fit: BoxFit.cover,
+                colorFilter: ColorFilter.mode(
+                  Colors.black.withOpacity(0.7),
+                  BlendMode.darken,
+                ),
+              ),
+            ),
+          ),
+          Positioned(
+            left: 0,
+            right: 0,
+            bottom: 100,
+            child: Opacity(
+              opacity: 0.8,
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 10.0),
+                child: Container(
+                  decoration: const BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.only(
+                      topLeft: Radius.circular(20.0),
+                      topRight: Radius.circular(20.0),
+                      bottomLeft: Radius.circular(20.0),
+                      bottomRight: Radius.circular(20.0),
+                    ),
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.black,
+                        spreadRadius: 5,
+                        blurRadius: 7,
+                        offset: Offset(0, 3), // changes position of shadow
+                      ),
+                    ],
+                  ),
+                  child: const Column(
+                    children: [
+                      SizedBox(height: 80),
+                      Center(
+                        child: Text(
+                          "GlyphGateway",
+                          style: TextStyle(
+                            color: Colors.black,
+                            fontSize: 24.0,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ),
+                      SizedBox(height: 10),
+                      Padding(
+                        padding: EdgeInsets.symmetric(horizontal: 20),
+                        child: TextField(
+                          decoration: InputDecoration(
+                            prefixIcon: Icon(Icons.person),
+                            labelText: 'Username',
+                            // hintText: 'hint text',
+                            //helperText: 'supporting text',
+                            border: UnderlineInputBorder(),
+                          ),
+                        ),
+                      ),
+                      SizedBox(height: 10),
+                      Padding(
+                        padding: EdgeInsets.symmetric(horizontal: 20),
+                        child: TextField(
+                          decoration: InputDecoration(
+                            prefixIcon: Icon(Icons.key),
+                            suffixIcon: Icon(Icons.visibility),
+                            labelText: 'Password',
+                            // hintText: 'hint text',
+                            //helperText: 'supporting text',
+                            border: UnderlineInputBorder(),
+                          ),
+                        ),
+                      ),
+                      SizedBox(height: 100),
+                    ],
+                  ),
+                ),
+              ),
+            ),
+          ),
+          Positioned(
+            bottom: 380,
+            left: 0,
+            right: 0,
+            child: Center(
+              child: Image.asset(
+                'lib/assests/logo.png',
+                width: 120,
+                height: 120,
+              ),
+            ),
+          ),
+          Positioned(
+            bottom: 120,
+            left: 0,
+            right: 0,
+            child: Center(
+              child: ElevatedButton(
+                onPressed: () {
+                  print("hello");
+                },
+                style: ButtonStyle(
+                  backgroundColor:
+                      MaterialStateProperty.all<Color>(Colors.teal),
+                  minimumSize:
+                      MaterialStateProperty.all<Size>(const Size(240, 50)),
+                ),
+                child: const Text('Login'),
+              ),
+            ),
+          ),
+          const Positioned(
+            bottom: 70,
+            left: 0,
+            right: 0,
+            child: Center(
+              child: Text(
+                'Register Now?',
+                style: TextStyle(
+                  color: Colors.teal,
+                  decoration: TextDecoration.underline,
+                  decorationColor: Colors.teal,
+                  decorationStyle: TextDecorationStyle.solid,
+                  shadows: [
+                    BoxShadow(
+                      color: Colors.black,
+                      blurRadius: 5,
+                      offset: Offset(2, 2),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ),
+          const Positioned(
+            bottom: 45,
+            left: 0,
+            right: 0,
+            child: Center(
+              child: Text(
+                'Continue Without Login',
+                style: TextStyle(
+                  color: Colors.teal,
+                  decoration: TextDecoration.underline,
+                  decorationColor: Colors.teal,
+                  decorationStyle: TextDecorationStyle.solid,
+                  shadows: [
+                    BoxShadow(
+                      color: Colors.black,
+                      blurRadius: 5,
+                      offset: Offset(2, 2),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class Register extends StatelessWidget {
+  const Register({super.key});
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        backgroundColor: Colors.yellow[700],
+        toolbarHeight: 20,
+      ),
+      body: Stack(
+        children: [
+          Container(
+            decoration: BoxDecoration(
+              image: DecorationImage(
+                image: const AssetImage('lib/assests/homebg.png'),
+                alignment: Alignment.center,
+                fit: BoxFit.cover,
+                colorFilter: ColorFilter.mode(
+                  Colors.black.withOpacity(0.6),
+                  BlendMode.darken,
+                ),
+              ),
+            ),
+          ),
+          Positioned(
+            left: 0,
+            right: 0,
+            bottom: 100,
+            child: Opacity(
+              opacity: 0.8,
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 10.0),
+                child: Container(
+                  decoration: const BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.only(
+                      topLeft: Radius.circular(20.0),
+                      topRight: Radius.circular(20.0),
+                      bottomLeft: Radius.circular(20.0),
+                      bottomRight: Radius.circular(20.0),
+                    ),
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.black,
+                        spreadRadius: 5,
+                        blurRadius: 7,
+                        offset: Offset(0, 3), // changes position of shadow
+                      ),
+                    ],
+                  ),
+                  child: const Column(
+                    children: [
+                      SizedBox(height: 80),
+                      Center(
+                        child: Text(
+                          "GlyphGateway",
+                          style: TextStyle(
+                            color: Colors.black,
+                            fontSize: 24.0,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ),
+                      SizedBox(height: 10),
+                      Padding(
+                        padding: EdgeInsets.symmetric(horizontal: 20),
+                        child: TextField(
+                          decoration: InputDecoration(
+                            prefixIcon: Icon(Icons.email),
+                            prefixIconColor: Colors.black,
+                            labelText: 'Email',
+                            // hintText: 'hint text',
+                            //helperText: 'supporting text',
+                            border: UnderlineInputBorder(),
+                          ),
+                        ),
+                      ),
+                      SizedBox(height: 10),
+                      Padding(
+                        padding: EdgeInsets.symmetric(horizontal: 20),
+                        child: TextField(
+                          decoration: InputDecoration(
+                            prefixIcon: Icon(Icons.person),
+                            prefixIconColor: Colors.black,
+                            labelText: 'Username',
+                            // hintText: 'hint text',
+                            //helperText: 'supporting text',
+                            border: UnderlineInputBorder(),
+                          ),
+                        ),
+                      ),
+                      SizedBox(height: 10),
+                      Padding(
+                        padding: EdgeInsets.symmetric(horizontal: 20),
+                        child: TextField(
+                          decoration: InputDecoration(
+                            prefixIcon: Icon(Icons.key),
+                            suffixIcon: Icon(Icons.visibility),
+                            prefixIconColor: Colors.black,
+                            suffixIconColor: Colors.black,
+                            labelText: 'Password',
+                            // hintText: 'hint text',
+                            //helperText: 'supporting text',
+                            border: UnderlineInputBorder(),
+                          ),
+                        ),
+                      ),
+                      SizedBox(height: 10),
+                      Padding(
+                        padding: EdgeInsets.symmetric(horizontal: 20),
+                        child: TextField(
+                          decoration: InputDecoration(
+                            prefixIcon: Icon(Icons.key),
+                            suffixIcon: Icon(Icons.visibility),
+                            prefixIconColor: Colors.black,
+                            suffixIconColor: Colors.black,
+                            labelText: 'Confirm Password',
+                            // hintText: 'hint text',
+                            //helperText: 'supporting text',
+                            border: UnderlineInputBorder(),
+                          ),
+                        ),
+                      ),
+                      SizedBox(height: 100),
+                    ],
+                  ),
+                ),
+              ),
+            ),
+          ),
+          Positioned(
+            bottom: 530,
+            left: 0,
+            right: 0,
+            child: Center(
+              child: Image.asset(
+                'lib/assests/logo.png',
+                width: 120,
+                height: 120,
+              ),
+            ),
+          ),
+          Positioned(
+            bottom: 120,
+            left: 0,
+            right: 0,
+            child: Center(
+              child: ElevatedButton(
+                onPressed: () {
+                  print("hello");
+                },
+                style: ButtonStyle(
+                  backgroundColor:
+                      MaterialStateProperty.all<Color>(Colors.teal),
+                  minimumSize:
+                      MaterialStateProperty.all<Size>(const Size(240, 50)),
+                ),
+                child: const Text('Register'),
+              ),
+            ),
+          ),
+          const Positioned(
+            bottom: 70,
+            left: 0,
+            right: 0,
+            child: Center(
+              child: Text(
+                'Already have an account? ',
+                style: TextStyle(
+                  color: Colors.teal,
+                  fontWeight: FontWeight.bold,
+                  decoration: TextDecoration.underline,
+                  decorationColor: Colors.teal,
+                  decorationStyle: TextDecorationStyle.solid,
+                  shadows: [
+                    BoxShadow(
+                      color: Colors.black,
+                      blurRadius: 5,
+                      offset: Offset(2, 2),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ),
+          const Positioned(
+            bottom: 45,
+            left: 0,
+            right: 0,
+            child: Center(
+              child: Text(
+                'Continue Without Login',
+                style: TextStyle(
+                  color: Colors.teal,
+                  fontWeight: FontWeight.bold,
+                  decoration: TextDecoration.underline,
+                  decorationColor: Colors.teal,
+                  decorationStyle: TextDecorationStyle.solid,
+                  shadows: [
+                    BoxShadow(
+                      color: Colors.black,
+                      blurRadius: 5,
+                      offset: Offset(2, 2),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ),
+        ],
+      ),
     );
   }
 }
