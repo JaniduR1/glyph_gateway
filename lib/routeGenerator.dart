@@ -1,4 +1,6 @@
 // ignore: file_names
+import 'package:camera/camera.dart';
+import 'package:clientapp/scenes/camera/index.dart';
 import 'package:clientapp/scenes/home/index.dart';
 import 'package:clientapp/scenes/login/index.dart';
 import 'package:clientapp/scenes/register/index.dart';
@@ -6,7 +8,7 @@ import 'package:flutter/material.dart';
 
 class RouteGenerator {
   static Route<dynamic> generateRoute(RouteSettings settings) {
-    //final args = settings.arguments;
+    final args = settings.arguments;
     switch (settings.name) {
       case '/':
         return MaterialPageRoute(builder: (_) => const GlyphGatewayHomePage());
@@ -15,8 +17,15 @@ class RouteGenerator {
       case '/login':
         return MaterialPageRoute(builder: (_) => const Login());
       case '/takeimage':
-        //
-        return MaterialPageRoute(builder: (_) => const Login());
+        if (args is CameraDescription) {
+          return MaterialPageRoute(
+              builder: (_) => TakePictureScreen(
+                    camera: args,
+                  ));
+        } else {
+          return unknownRoute();
+        }
+
       default:
         return unknownRoute();
     }

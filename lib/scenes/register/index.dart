@@ -190,26 +190,30 @@ class Register extends StatelessWidget {
               ),
             ),
           ),
-          const Positioned(
+          Positioned(
             bottom: 45,
             left: 0,
             right: 0,
             child: Center(
-              child: Text(
-                'Continue Without Login',
-                style: TextStyle(
-                  color: Colors.teal,
-                  fontWeight: FontWeight.bold,
-                  decoration: TextDecoration.underline,
-                  decorationColor: Colors.teal,
-                  decorationStyle: TextDecorationStyle.solid,
-                  shadows: [
-                    BoxShadow(
-                      color: Colors.black,
-                      blurRadius: 5,
-                      offset: Offset(2, 2),
-                    ),
-                  ],
+              child: GestureDetector(
+                onTap: () {
+                  print('Continue Without Login pressed');
+                },
+                child: const Text(
+                  'Continue Without Login',
+                  style: TextStyle(
+                    color: Colors.teal,
+                    decoration: TextDecoration.underline,
+                    decorationColor: Colors.teal,
+                    decorationStyle: TextDecorationStyle.solid,
+                    shadows: [
+                      BoxShadow(
+                        color: Colors.black,
+                        blurRadius: 5,
+                        offset: Offset(2, 2),
+                      ),
+                    ],
+                  ),
                 ),
               ),
             ),

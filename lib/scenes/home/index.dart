@@ -1,3 +1,4 @@
+import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
 
 class GlyphGatewayHomePage extends StatelessWidget {
@@ -84,26 +85,41 @@ class GlyphGatewayHomePage extends StatelessWidget {
               ),
             ),
           ),
-          const Positioned(
+          Positioned(
             bottom: 45,
             left: 0,
             right: 0,
-            child: Center(
-              child: Text(
-                'Continue Without Login',
-                style: TextStyle(
-                  color: Colors.teal,
-                  fontWeight: FontWeight.bold,
-                  decoration: TextDecoration.underline,
-                  decorationColor: Colors.teal,
-                  decorationStyle: TextDecorationStyle.solid,
-                  shadows: [
-                    BoxShadow(
-                      color: Colors.black,
-                      blurRadius: 5,
-                      offset: Offset(2, 2),
-                    ),
-                  ],
+            child: GestureDetector(
+              onTap: () async {
+                // Get the available cameras
+                List<CameraDescription> cameras = await availableCameras();
+                // Check if cameras are available and not empty
+                if (cameras.isNotEmpty) {
+                  // Pass the first camera to the '/takeimage' screen
+                  // ignore: use_build_context_synchronously
+                  Navigator.of(context)
+                      .pushNamed('/takeimage', arguments: cameras.first);
+                } else {
+                  print('No camera available');
+                }
+              },
+              child: const Center(
+                child: Text(
+                  'Continue Without Login',
+                  style: TextStyle(
+                    color: Colors.teal,
+                    fontWeight: FontWeight.bold,
+                    decoration: TextDecoration.underline,
+                    decorationColor: Colors.teal,
+                    decorationStyle: TextDecorationStyle.solid,
+                    shadows: [
+                      BoxShadow(
+                        color: Colors.black,
+                        blurRadius: 5,
+                        offset: Offset(2, 2),
+                      ),
+                    ],
+                  ),
                 ),
               ),
             ),
