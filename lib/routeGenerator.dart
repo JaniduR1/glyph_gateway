@@ -1,5 +1,6 @@
 // ignore: file_names
 import 'package:camera/camera.dart';
+import 'package:clientapp/scenes/ImageTest/index.dart';
 import 'package:clientapp/scenes/camera/index.dart';
 import 'package:clientapp/scenes/home/index.dart';
 import 'package:clientapp/scenes/login/index.dart';
@@ -14,8 +15,10 @@ class RouteGenerator {
         return MaterialPageRoute(builder: (_) => const GlyphGatewayHomePage());
       case '/register':
         return MaterialPageRoute(builder: (_) => const Register());
-      case '/login':
+      case '/login2':
         return MaterialPageRoute(builder: (_) => const Login());
+      case '/login':
+        return MaterialPageRoute(builder: (_) => const ImagePickerCropper());
       case '/takeimage':
         if (args is CameraDescription) {
           return MaterialPageRoute(
