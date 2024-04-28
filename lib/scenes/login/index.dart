@@ -1,10 +1,77 @@
+// ignore_for_file: prefer_const_constructors, no_leading_underscores_for_local_identifiers
+
+import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
+import 'dart:io';
 
 class Login extends StatelessWidget {
   const Login({Key? key}) : super(key: key);
 
+  Future<void> loginUser(
+      BuildContext context, String username, String password) async {
+    var url = Uri.parse('http://10.0.2.2:8000/glyphServer/login/');
+
+    try {
+      var response = await http.post(
+        url,
+        body: {'username': username, 'password': password},
+      );
+
+      if (response.statusCode == 200) {
+        //print('Login successful');
+        Navigator.of(context).pushNamed('/login2');
+        // _showAlertDialog(context, 'Login successful');
+        // List<CameraDescription> cameras = await availableCameras();
+        // // Check if cameras are available and not empty
+        // if (cameras.isNotEmpty) {
+        //   // Pass the first camera to the '/takeimage' screen
+        //   // ignore: use_build_context_synchronously
+
+        //   Navigator.of(context)
+        //       .pushNamed('/takeimage', arguments: cameras.first);
+        // } else {
+        //   print('No camera available');
+        // }
+      } else {
+        _showAlertDialog(context, 'Login failed: ${response.body}');
+        print('Login failed: ${response.body}');
+        Navigator.of(context).pushNamed('/login2');
+      }
+    } catch (e) {
+      if (e is SocketException) {
+        print('Error: ${e}');
+      } else {
+        print('Unexpected error: $e');
+      }
+    }
+  }
+
+  void _showAlertDialog(BuildContext context, String message) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text('Login Status'),
+          content: Text(message),
+          actions: [
+            TextButton(
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+              child: Text('OK'),
+            ),
+          ],
+        );
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
+    TextEditingController _usernameController = TextEditingController();
+    TextEditingController _passwordController = TextEditingController();
+
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.yellow[700],
@@ -51,7 +118,7 @@ class Login extends StatelessWidget {
                       ),
                     ],
                   ),
-                  child: const Column(
+                  child: Column(
                     children: [
                       SizedBox(height: 80),
                       Center(
@@ -68,6 +135,7 @@ class Login extends StatelessWidget {
                       Padding(
                         padding: EdgeInsets.symmetric(horizontal: 20),
                         child: TextField(
+                          controller: _usernameController,
                           decoration: InputDecoration(
                             prefixIcon: Icon(Icons.person),
                             labelText: 'Username',
@@ -80,6 +148,7 @@ class Login extends StatelessWidget {
                       Padding(
                         padding: EdgeInsets.symmetric(horizontal: 20),
                         child: TextField(
+                          controller: _passwordController,
                           decoration: InputDecoration(
                             prefixIcon: Icon(Icons.key),
                             suffixIcon: Icon(Icons.visibility),
@@ -116,7 +185,9 @@ class Login extends StatelessWidget {
             child: Center(
               child: ElevatedButton(
                 onPressed: () {
-                  print("Login button pressed");
+                  String username = _usernameController.text.trim();
+                  String password = _passwordController.text.trim();
+                  loginUser(context, username, password);
                 },
                 style: ButtonStyle(
                   backgroundColor:

@@ -15,9 +15,9 @@ class RouteGenerator {
         return MaterialPageRoute(builder: (_) => const GlyphGatewayHomePage());
       case '/register':
         return MaterialPageRoute(builder: (_) => const Register());
-      case '/login2':
-        return MaterialPageRoute(builder: (_) => const Login());
       case '/login':
+        return MaterialPageRoute(builder: (_) => const Login());
+      case '/login2':
         return MaterialPageRoute(builder: (_) => const ImagePickerCropper());
       case '/takeimage':
         if (args is CameraDescription) {

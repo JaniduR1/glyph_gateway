@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 
 class GlyphGatewayHomePage extends StatelessWidget {
   const GlyphGatewayHomePage({super.key});
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -99,6 +98,10 @@ class GlyphGatewayHomePage extends StatelessWidget {
                   // ignore: use_build_context_synchronously
                   Navigator.of(context)
                       .pushNamed('/takeimage', arguments: cameras.first);
+
+                  Navigator.of(context).pushNamed('/login');
+                  // Navigator.of(context)
+                  //.pushNamed('/takeimage', arguments: cameras.first);
                 } else {
                   print('No camera available');
                 }

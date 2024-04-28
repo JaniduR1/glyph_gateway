@@ -1,14 +1,15 @@
 import 'dart:io';
 
 import 'package:clientapp/Image_helper.dart';
+import 'package:clientapp/api_service/uploadImage.dart';
 import 'package:flutter/material.dart';
 import 'package:image_cropper/image_cropper.dart';
+import 'package:http/http.dart' as http;
 
 final imageHelper = ImageHelper();
 
 class ImagePickerCropper extends StatelessWidget {
   const ImagePickerCropper({super.key});
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -37,7 +38,6 @@ class ProfileImage extends StatefulWidget {
 // ignore: unused_element
 class _ProfileImageState extends State<ProfileImage> {
   File? _image;
-
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -66,6 +66,7 @@ class _ProfileImageState extends State<ProfileImage> {
                   setState(() {
                     _image = File(croppedFile.path);
                   });
+                  await uploadImage(_image!);
                 }
               }
             },
