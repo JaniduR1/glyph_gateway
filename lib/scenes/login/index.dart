@@ -1,6 +1,5 @@
 // ignore_for_file: prefer_const_constructors, no_leading_underscores_for_local_identifiers
-
-import 'package:camera/camera.dart';
+import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:io';
@@ -10,12 +9,16 @@ class Login extends StatelessWidget {
 
   Future<void> loginUser(
       BuildContext context, String username, String password) async {
-    var url = Uri.parse('http://10.0.2.2:8000/glyphServer/login/');
+    var url = Uri.parse('http://10.0.2.2:5001/api/user/login');
+    // var uri = Uri.parse('http://<Use your own IP (the one with the server running)>:5001/api/predict/');
 
     try {
       var response = await http.post(
         url,
-        body: {'username': username, 'password': password},
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: jsonEncode({'username': username, 'password': password}),
       );
 
       if (response.statusCode == 200) {
@@ -36,7 +39,6 @@ class Login extends StatelessWidget {
       } else {
         _showAlertDialog(context, 'Login failed: ${response.body}');
         print('Login failed: ${response.body}');
-        Navigator.of(context).pushNamed('/login2');
       }
     } catch (e) {
       if (e is SocketException) {

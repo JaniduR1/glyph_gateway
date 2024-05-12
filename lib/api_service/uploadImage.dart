@@ -6,6 +6,7 @@ import 'package:http/http.dart' as http;
 
 Future<void> uploadImage(BuildContext context, File imageFile) async {
   var uri = Uri.parse('http://10.0.2.2:5001/api/predict/');
+  // var uri = Uri.parse('http://<Use your own IP (the one with the server running)>:5001/api/predict/');
   var request = http.MultipartRequest('POST', uri);
   var multipartFile =
       await http.MultipartFile.fromPath('image', imageFile.path);

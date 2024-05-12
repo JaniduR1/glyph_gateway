@@ -81,6 +81,7 @@ class _ProfileImageState extends State<ProfileImage> {
                   });
                   //################################
                   var uri = Uri.parse('http://10.0.2.2:5001/api/predict/');
+                  // var uri = Uri.parse('http://<Use your own IP (the one with the server running)>:5001/api/predict/');
                   var request = http.MultipartRequest('POST', uri);
                   var multipartFile = await http.MultipartFile.fromPath(
                       'image', croppedFile.path);
